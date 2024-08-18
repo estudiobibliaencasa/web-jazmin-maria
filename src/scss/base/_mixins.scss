@@ -1,0 +1,239 @@
+@use 'base/variables' as v;
+
+/** Media Queries **/
+@mixin mobile {
+  @media (min-width: v.$mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: v.$tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: v.$desktop) {
+    @content;
+  }
+}
+
+@mixin xl_desktop {
+  @media (min-width: v.$xl_desktop) {
+    @content;
+  }
+}
+
+@mixin button($bgColor, $textColor) {
+  /* Visualización y diseño */
+  /* Display and layout */
+  display: inline-block;
+  padding: 1.5rem 4rem;
+  border: none;
+  border-radius: 0.8rem;
+  width: 100%;
+
+  /* Typography and text */
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+
+  /* Colors */
+  background-color: $bgColor;
+  color: $textColor;
+
+  /* Interacción y comportamiento */
+  /* Interaction and behavior */
+  cursor: pointer;
+
+  /* Transitions and Animations */
+  transition-property: background-color;
+  transition-duration: 0.3s;
+
+  &:hover {
+    background-color: darken($bgColor, 10%);
+    cursor: pointer;
+  }
+
+  // Al deshabilitar el input submit se aplican estos estilos para que sea evidente que está deshabilitado
+  &:disabled {
+    background-color: darken($bgColor, 20%);
+    // pointer-events: none; // Es mejor cursor: not-allowed para que se vea en el cursor el no permitido
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  @include tablet {
+    width: auto;
+  }
+}
+
+@mixin grid($columns, $spacing) {
+  display: grid;
+  gap: $spacing;
+  grid-template-columns: repeat($columns, 1fr);
+}
+
+@mixin fluidText($min, $max) {
+  font-size: clamp($min, -0.8rem + 10vw, $max);
+}
+
+@mixin gradientText($colorStart, $ColorEnd) {
+  background: linear-gradient(to right, $colorStart, $ColorEnd);
+  background-clip: text;
+  color: transparent;
+}
+
+@mixin bgGradient($bgColor) {
+  background-image: linear-gradient(to left top, $bgColor, lighten($bgColor, 15%));
+}
+
+@mixin container {
+  width: min(95%, 140rem);
+  margin: 0 auto;
+}
+
+@mixin container-md {
+  width: min(95%, 80rem);
+  margin: 0 auto;
+}
+
+@mixin container-sm {
+  width: min(95%, 60rem);
+  margin: 0 auto;
+}
+
+@mixin headings {
+  font-family: v.$font_primary;
+  font-weight: v.$heavy;
+  margin: 2rem 0;
+}
+
+@mixin page-name {
+  @include headings;
+  margin: 6rem 0 3rem 0;
+  text-align: center;
+}
+
+@mixin page-description {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: v.$light;
+  color: v.$grayDark;
+  margin-bottom: 5rem;
+}
+
+@mixin logo {
+  color: v.$white;
+  text-align: center;
+  margin-bottom: 2rem;
+  white-space: nowrap;
+
+  @include desktop {
+    text-align: left;
+    margin: 0;
+  }
+}
+
+@mixin menu-social($color, $size) {
+  &__link {
+    &::before {
+      color: $color;
+      font-size: $size;
+      display: inline-block;
+      font-style: normal;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font-family: 'Font Awesome 6 Brands';
+    }
+
+    &[href*="facebook.com"]::before
+    {
+      content: '\f39e';
+    }
+
+    &[href*="twitter.com"]::before
+    {
+      content: '\f099';
+    }
+
+    &[href*="youtube.com"]::before
+    {
+      content: '\f167';
+    }
+
+    &[href*="instagram.com"]::before
+    {
+      content: '\f16d';
+    }
+
+    &[href*="tiktok.com"]::before
+    {
+      content: '\e07b';
+    }
+
+    &[href*="github.com"]::before
+    {
+      content: '\f09b';
+    }
+  }
+
+  &__hidden {
+    display: none;
+  }
+}
+
+@mixin link {
+  // all: unset; // Elimina todos los estilos por defecto
+  color: v.$white;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  font-weight: v.$bold;
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    color: v.$primary;
+    cursor: pointer;
+  }
+}
+
+@mixin shadow {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin tags {
+  @include reset-list;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+
+  // selector ">": Primer nivel de hijos.
+  > li {
+    background-color: v.$primary;
+    color: v.$white;
+    padding: 1rem;
+    border-radius: 0.8rem;
+    font-size: 1.4rem;
+    font-weight: v.$bold;
+  }
+}
+
+@mixin card {
+  border: 1px solid lighten(v.$gray, 10%);
+  padding: 3rem;
+
+  &__name {
+    font-weight: v.$heavy;
+    font-size: 2.6rem;
+    margin: 2rem 0;
+  }
+}

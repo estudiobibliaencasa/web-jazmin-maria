@@ -1,0 +1,43 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+body {
+  background-color: v.$dark;
+  color: v.$white;
+}
+
+.container {
+  @include m.container-md;
+  padding: 50px 0;
+}
+
+.img-container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.img-container img {
+  margin: 0 auto;
+  max-width: 500px;
+  max-height: 350px;
+  object-fit: cover;
+}
+
+.img-container p {
+  text-align: center;
+}
+
+.iframe-gmaps {
+  margin: 0 auto;
+  text-align: center;
+}
+.iframe-gmaps iframe {
+  margin: 0 auto;
+  max-width: 600px;
+  height: 450px;
+}
+
+.footer {
+  padding: 60px 0 40px;
+  text-align: center;
+}
